@@ -1,0 +1,11 @@
+#!/bin/bash
+# using untill it prints best school 10 times.
+
+count=0
+
+until ((count == 10))
+do
+    echo "Best School"
+    ((count++))
+done
+
