@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 # Printss 'Best School' 10 times utilizing a for loop.
 
-counter=0
-
-while [ $counter -lt 10 ]
+for ((count=0; count<10; count++))
 do
-  echo "Best School"
-  ((counter++))
+    echo "Best School"
 done
+
