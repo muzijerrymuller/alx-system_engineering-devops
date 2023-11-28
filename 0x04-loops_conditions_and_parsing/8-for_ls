@@ -2,6 +2,6 @@
 # In a list format it displays content in current directory.
 # displays part of infront of hash
 
-for i in $(ls); do
+for i in $(ls -I '.*'); do
     echo "$i" | cut -d '-' -f2
 done
