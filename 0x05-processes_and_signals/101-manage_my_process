@@ -2,29 +2,30 @@
 # script being managed.
 
 case "$1" in
-  "start")
+  start)
     ./manage_my_process &
     echo "$!" > /var/run/my_process.pid
     echo "manage_my_process started"
     ;;
 
-  "stop")
+  stop)
     echo "manage_my_process stopped"
-    if [ -f "/var/run/my_process.pid" ]; then
-      kill "$(cat /var/run/my_process.pid)"
+    pid=$(cat /var/run/my_process.pid 2>/dev/null)
+    if [ -n "$pid" ]; then
+      kill "$pid"
       rm /var/run/my_process.pid
     else
-      echo "PID file not found. manage_my_process may not be running."
+      echo "No running process found."
     fi
     ;;
 
-  "restart")
-    if [ -f "/var/run/my_process.pid" ]; then
+  restart)
+    pid=$(cat /var/run/my_process.pid 2>/dev/null)
+    if [ -n "$pid" ]; then
       echo "manage_my_process stopped"
-      kill "$(cat /var/run/my_process.pid)"
+      kill "$pid"
       rm /var/run/my_process.pid
     fi
-
     ./manage_my_process &
     echo "$!" > /var/run/my_process.pid
     echo "manage_my_process restarted"
