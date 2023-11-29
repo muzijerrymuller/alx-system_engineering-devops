@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 # to infinity and beyond process killed
 
-process_ids=$(ps aux | grep '4-to_infinity_and_beyond' | grep -v grep | awk '{print $2}')
+process_id=$(pgrep -f '4-to_infinity_and_beyond')
 
-if [ -n "$process_ids" ]; then
-    for pid in $process_ids; do
-        kill "$pid"
-    done
+if [ -n "$process_id" ]; then
+    kill "$process_id"
 else
     echo "Process not found."
 fi
