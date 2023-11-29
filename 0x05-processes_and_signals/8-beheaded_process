@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# highlander killed
+
+process_id=$(pgrep -f '7-highlander')
+
+if [ -n "$process_id" ]; then
+    kill -SIGKILL "$process_id"
+else
+    echo "Process not found."
+fi
