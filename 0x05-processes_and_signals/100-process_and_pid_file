@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Does the following:
+# /var/run/myscript.pid file created cwith the script PID.
+# "To infinity and beyond" display
+#  reciece SIgterm "I hate the kill command" display
+# "Y U no love me?!" display
+# /var/run/myscript.pid deleted
+
+terminator() {
+  rm /var/run/myscript.pid
+  exit
+}
+
+echo "$$" > /var/run/myscript.pid
+
+trap 'echo "Y U no love me?!"' SIGINT
+trap 'echo "I hate the kill command" && terminator' SIGTERM
+trap 'terminator' SIGQUIT
+
+while true
+do
+  echo "To infinity and beyond"
+  sleep 2
+done
