@@ -1,9 +1,4 @@
 #!/usr/bin/env bash
-# 4-to_infinity_and_beyond process killed
+# 4-to_infinity_and_beyond killed
 
-pid=$(ps aux | grep '4-to_infinity_and_beyond' | grep -v grep | awk '{print $2}
-if [ -n "$pid" ]; then
-    kill "$pid"
-else
-    echo "Process '4-to_infinity_and_beyond' not found."
-fi
+kill "$(ps aux | grep '4-to_infinity_and_beyond' | awk '{print $2}')"
