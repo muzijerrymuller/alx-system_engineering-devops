@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# script being managed.
+
+case "$1" in
+  "start")
+    ./manage_my_process &
+    echo "$!" > /var/run/my_process.pid
+    echo "manage_my_process started"
+    ;;
+
+  "stop")
+    echo "manage_my_process stopped"
+    if [ -f "/var/run/my_process.pid" ]; then
+      kill "$(cat /var/run/my_process.pid)"
+      rm /var/run/my_process.pid
+    else
+      echo "PID file not found. manage_my_process may not be running."
+    fi
+    ;;
+
+  "restart")
+    if [ -f "/var/run/my_process.pid" ]; then
+      echo "manage_my_process stopped"
+      kill "$(cat /var/run/my_process.pid)"
+      rm /var/run/my_process.pid
+    fi
+
+    ./manage_my_process &
+    echo "$!" > /var/run/my_process.pid
+    echo "manage_my_process restarted"
+    ;;
+
+  *)
+    echo "Usage: manage_my_process {start|stop|restart}"
+    ;;
+esac
