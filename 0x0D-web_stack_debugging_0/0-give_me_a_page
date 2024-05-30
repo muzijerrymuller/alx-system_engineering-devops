@@ -1,2 +1,4 @@
+#!/usr/bin/env bash
 # When querying the root return a page containing 'Hello Holberton'
+#
 echo "Hello Holberton" > /var/www/html/index.html
