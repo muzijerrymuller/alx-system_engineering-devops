@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # Configures nginx and ensures it stops properly
 sed -i 's/listen 80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
-service nginx start
-service nginx stop
+nginx
+nginx -s stop
