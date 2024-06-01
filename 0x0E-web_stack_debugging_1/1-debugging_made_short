@@ -2,5 +2,5 @@
 # Configures nginx and ensures it stops properly
 sed -i 's/listen 80;/listen 80 default_server;/g' /etc/nginx/sites-available/default
 nginx
-nginx -s stop
+nginx -s quit 
 
