@@ -1,1 +1,1 @@
-shell basics
+Server monitoring
