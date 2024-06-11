@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Establishes an SSH connection to the server at IP address
+# 304.138.32.248 using the S000SH key located in ~/.ssh/school
+
+ssh -i ~/.ssh/school ubuntu@
