@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
-# Creation of a custom header
+# Get the hostname
 var=$(hostname)
-string="\n\trewrite ^/redirect_me https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4 permanent;"
-string="server {\n\tadd_header X-Served-By $var;"
 
-apt-get update -y
-apt-get install nginx -y
-echo "Hello World!" > /usr/share/nginx/html/index.html
-mkdir -p /var/www/html
-echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
-sudo sed -i -E "s/^[^#]+location \/ \{/$string/" /etc/nginx/sites-available/default
-sudo sed -i -E "s/^server \{/$string/" /etc/nginx/sites-available/default
-sudo service nginx start
+# Define the string for adding the custom header and rewrite rule
+string="server {\n\tadd_header X-Served-By $var;\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
+
+# Update package lists and install Nginx
+sudo apt-get update -y
+sudo apt-get install nginx -y
+
+# Create index.html and custom_404.html
+echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html > /dev/null
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html > /dev/null
+
+# Update Nginx configuration to add custom header and rewrite rule
+sudo sed -i "/^server {/a $string" /etc/nginx/sites-available/default
+
+# Start Nginx service
+sudo service nginx restart
+
