@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#Default server port restored.
+#Default server port configuration restored to ensure proper listening and handling of HTTP requests.
 
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx start
