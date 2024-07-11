@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-#This Bash script does the following:
-#Default server port configuration has been restored to ensure proper listening
+#This Bash script does the following: The Default server port configuration
+#has been restored to ensure proper listening
 #handling of HTTP requests, & optimal server performance & stability
-#preventing any potential connectivity issues or service interruptions all automated.
+#preventing any potential connectivity issues or service interruptions
+#and this script automates that.
 
 
 
