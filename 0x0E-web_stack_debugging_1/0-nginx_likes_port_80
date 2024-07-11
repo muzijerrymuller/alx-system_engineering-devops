@@ -3,5 +3,8 @@
 #handling of HTTP requests, & optimal server performance & stability
 #preventing any potential connectivity issues or service interruptions.
 
+
+
+
 sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx start
