@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Load balancer
+# Haproxy configured to send traffix to web 01 & web 02 &
+# using round ribon to distribute requests.
+
+sudo apt-get -y update
+apt-get -y install haproxy
+sudo chown $USER:USER /etc/haproxy/haproxy.cfg
+
+echo "
+frontend Muzi Jerry Muller
+	bind *:80
+	mode http
+	default_backend jerry
+
+backend jerry
+	balance roundrobin
+	server 97485-web-01 34.239.249.78:80 check
+	server 97485-web-02 100.27.4.157:80 check" >> /etc/haproxy/haproxy.cfg
+
+sudo service restart haproxy
