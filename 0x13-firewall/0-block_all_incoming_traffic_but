@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# This script sets up UFW
+# It doesnt allow any incoming traffic becicdes from the following ports
+# 22, 443, 80.
 
 apt-get install ufw
 sed -i 's/IPV6=.*/IPV6=yes/' /etc/default/ufw
