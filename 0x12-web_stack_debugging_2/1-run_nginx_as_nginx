@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Corrects misalignment in server configuration.
+# Corrects misalignment in server configuration and runs nginx as nginx and prevets other users from logging in as root and changing things to its been changed to 644.
+
+
 chmod 644 /etc/nginx/nginx.conf
 sed -Ei 's/\s*#?\s*user .*/user nginx;/' /etc/nginx/nginx.conf
 sed -Ei 's/(listen (\[::\]:)?80) /\180 /' /etc/nginx/sites-enabled/default
