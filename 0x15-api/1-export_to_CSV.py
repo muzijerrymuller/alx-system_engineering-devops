@@ -5,27 +5,19 @@ employee information
 in csv format
 """
 
+import csv
 import requests
 import sys
-import csv
 
 if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com/"
     user_id = sys.argv[1]
+    url = "https://jsonplaceholder.typicode.com/"
     user = requests.get(url + "users/{}".format(user_id)).json()
-    username = user.get("name")
+    username = user.get("username")
     todos = requests.get(url + "todos", params={"userId": user_id}).json()
 
-    tasks_data = [
-        [user_id, username, 'Completed' if t.get("completed") else 'Not Completed', t.get("title")]
-        for t in todos
-    ]
-
-    csv_filename = f"{user_id}.csv"
-
-    with open(csv_filename, mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE'])
-        writer.writerows(tasks_data)
-
-    print(f"Tasks have been saved to {csv_filename}")
+    with open("{}.csv".format(user_id), "w", newline="") as csvfile:
+        writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
+        [writer.writerow(
+            [user_id, username, t.get("completed"), t.get("title")]
+         ) for t in todos]
