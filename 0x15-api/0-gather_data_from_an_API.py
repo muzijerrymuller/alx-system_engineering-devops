@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+This takes a name a return what the employee has
+to do and the progress of the employee
+"""
 
 import requests
 import sys
