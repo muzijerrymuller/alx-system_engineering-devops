@@ -1,29 +1,25 @@
 #!/usr/bin/python3
 
 """
-my python code extracts the number of
-subscribers from a specific subreddit on Reddit
-0-subs.py
+Returns the number of subscribers for a given subreddit.
+If the subreddit is invalid, returns 0.
 """
+
 import requests
 
 def number_of_subscribers(subreddit):
     """
-    Returns the number of subs
+    Returns the number of subscribers for a given subreddit.
+    If the subreddit is invalid, returns 0.
     """
-    if subreddit is None or type(subreddit) is not str:
-        return 0
-
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.5790.102 Safari/537.36 Edg/115.0.1901.182'
-    }
+    headers = {'User-Agent': 'python:subscribers.counter:v1.0.0 (by /u/yourusername)'}
+    url = f'https://www.reddit.com/r/{subreddit}/about.json'
 
     try:
-        r = requests.get(f'https://www.reddit.com/r/{subreddit}/about.json', headers=headers)
-        r.raise_for_status()  # Raises an HTTPError for bad responses
-        subs = r.json().get("data", {}).get("subscribers", 0)
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching data: {e}")
+        response = requests.get(url, headers=headers, allow_redirects=False, timeout=10)
+        if response.status_code == 200:
+            return response.json().get("data", {}).get("subscribers", 0)
+        else:
+            return 0
+    except requests.RequestException:
         return 0
-
-    return subs
