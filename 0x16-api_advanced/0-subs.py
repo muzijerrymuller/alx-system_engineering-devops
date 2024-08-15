@@ -8,16 +8,18 @@ subscribers from a specific subreddit on Reddit
 import requests
 
 def number_of_subscribers(subreddit):
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {"User-Agent": "MuziMuller/1.0"}
-    response = requests.get(url, headers=headers, allow_redirects=False)
-
-    if response.status_code != 200:
+    """NUMBER OF SUBS"""
+    if subreddit is None or type(subreddit) is not str:
         return 0
-
+    
+    headers = {'User-Agent': 'aLX/1.0'}
+    
     try:
-        data = response.json()
-        results = data.get("data", {})
-        return results.get("subscribers", 0)
-    except (ValueError, KeyError):
+        r = requests.get(f'http://www.reddit.com/r/{subreddit}/about.json', headers=headers)
+        r.raise_for_status()
+        subs = r.json().get("data", {}).get("subscribers", 0)
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data: {e}")
         return 0
+    
+    return subs
