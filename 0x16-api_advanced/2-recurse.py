@@ -1,10 +1,17 @@
 #!/usr/bin/python3
 
+
+
+
 """
 A recursive approach to fetch all hot article titles from Reddit
 for a specific subreddit using the Reddit API.
 AND THEN Returns None if the subreddit has no content.
 """
+
+
+
+
 
 def recurse(subreddit, hot_list=[], after=""):
     """

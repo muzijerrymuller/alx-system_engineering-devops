@@ -1,14 +1,14 @@
 #!/usr/bin/python3
 
 """
-The code prints the first 10 posts
+prints first dedicated amout of posts
 """
 
 import requests
 
 def top_ten(subreddit):
     """
-    This titles of the first 10 porsts
+    prints the first dedicated amount of posts
     """
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.5790.102 Safari/537.36 Edg/115.0.1901.182'
